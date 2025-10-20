@@ -1,0 +1,11 @@
+{
+  "name": "keeneyes-landing",
+  "version": "1.0.0",
+  "description": "Keeneyes landing page",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

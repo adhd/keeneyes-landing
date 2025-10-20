@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keeneyes — Understand your world through conversation</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Warm, paper-like backgrounds
+                        'paper': {
+                            50: '#FFFFFF',
+                            100: '#FAFAF8',
+                            200: '#F5F5F0',
+                            300: '#EDEDEA',
+                            400: '#E5E5E0',
+                            500: '#D4D4CE'
+                        },
+                        // Deep ink tones for text
+                        'ink': {
+                            50: '#F0F0F0',
+                            100: '#D1D1D1',
+                            200: '#A3A3A3',
+                            300: '#737373',
+                            400: '#525252',
+                            500: '#404040',
+                            600: '#262626',
+                            700: '#1A1A1A',
+                            800: '#0F0F0F',
+                            900: '#050505'
+                        },
+                        // Deep ocean blue for primary
+                        'ocean': {
+                            50: '#E6F2FF',
+                            100: '#C7E0FF',
+                            200: '#8FC1FF',
+                            300: '#5CA3FF',
+                            400: '#2985FF',
+                            500: '#0066CC',
+                            600: '#0052A3',
+                            700: '#003D7A',
+                            800: '#002952',
+                            900: '#001529'
+                        },
+                        // Warm amber accent
+                        'amber': {
+                            50: '#FFFBEB',
+                            100: '#FEF3C7',
+                            200: '#FDE68A',
+                            300: '#FCD34D',
+                            400: '#FBBF24',
+                            500: '#F59E0B',
+                            600: '#D97706',
+                            700: '#B45309'
+                        }
+                    },
+                    fontFamily: {
+                        'serif': ['Crimson Text', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'mono': ['IBM Plex Mono', 'monospace']
+                    },
+                    animation: {
+                        'fade-in': 'fade-in 0.8s ease-out forwards',
+                        'slide-up': 'slide-up 1s ease-out forwards',
+                        'float-gentle': 'float-gentle 8s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s ease-in-out infinite',
+                        'search-overlay-in': 'search-overlay-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+                        'result-stagger': 'result-stagger 0.3s ease-out forwards'
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px rgba(0, 0, 0, 0.04)',
+                        'lifted': '0 10px 40px rgba(0, 0, 0, 0.06)',
+                        'overlay': '0 20px 60px rgba(0, 0, 0, 0.12)',
+                        'glow': '0 0 60px rgba(245, 158, 11, 0.08)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-paper-100 text-ink-700 font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-paper-50/90 backdrop-blur-md border-b border-paper-400/30 transition-all duration-300">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-ocean-500 flex items-center justify-center">
+                        <span class="text-paper-50 font-bold text-xs sm:text-sm">K</span>
+                    </div>
+                    <span class="text-lg sm:text-xl font-medium text-ink-700">Keeneyes</span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#how" class="text-ink-400 hover:text-ink-700 transition-colors duration-200">How it works</a>
+                    <a href="#scenarios" class="text-ink-400 hover:text-ink-700 transition-colors duration-200">See yourself here</a>
+                    <button class="bg-ocean-500 hover:bg-ocean-600 text-paper-50 px-5 py-2.5 rounded-full transition-all duration-200 font-medium shadow-soft hover:shadow-lifted">
+                        Get early access
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button class="md:hidden p-2 text-ink-400">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12h18M3 6h18M3 18h18" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-12">
+        <!-- Subtle background pattern -->
+        <div class="absolute inset-0 opacity-[0.015]">
+            <svg width="100%" height="100%">
+                <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <circle cx="20" cy="20" r="1" fill="#0066CC"/>
+                </pattern>
+                <rect width="100%" height="100%" fill="url(#dots)"/>
+            </svg>
+        </div>
+
+        <!-- Main content -->
+        <div class="relative z-10 w-full max-w-4xl mx-auto">
+            <div class="text-center space-y-2 sm:space-y-4 lg:space-y-6">
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-serif font-light text-ink-700 leading-tight">
+                    You think you remember.
+                    <span class="relative inline-block">
+                        <span class="relative z-10 text-ocean-500 font-normal italic">You don't.</span>
+                        <svg class="absolute -bottom-1 sm:-bottom-2 left-0 w-full" height="8" viewBox="0 0 200 8">
+                            <path d="M 0 4 Q 50 0, 100 4 T 200 4" stroke="#F59E0B" stroke-width="2" fill="none" opacity="0.5"/>
+                        </svg>
+                    </span>
+                </h1>
+
+                <p class="text-base sm:text-lg lg:text-xl text-ink-400 max-w-2xl mx-auto leading-relaxed px-6">
+                    Every conversation holds intelligence others miss. Patterns emerge. Intentions reveal themselves. While everyone else operates blind, you'll see the complete picture.
+                </p>
+
+                <!-- Desktop: Mac App Interface -->
+                <div class="hidden sm:block relative max-w-4xl mx-auto px-4">
+                    <div class="mac-application bg-white rounded-t-xl shadow-2xl overflow-hidden border border-gray-300 border-b-0" style="height: 45vh;">
+
+                        <!-- Mac Window Title Bar with Unified Toolbar -->
+                        <div class="mac-titlebar bg-gradient-to-b from-gray-100 to-gray-50 px-4 py-2 flex items-center justify-between border-b border-gray-300">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                                    <span class="text-sm text-gray-700 font-medium">Recording</span>
+                                </div>
+                                <div class="text-gray-600 text-sm font-medium">Keeneyes</div>
+                            </div>
+                            <div class="w-16"></div>
+                        </div>
+
+                        <!-- Professional Intelligence Dashboard -->
+                        <div class="bg-white h-full" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;">
+
+                            <!-- Simplified Header -->
+                            <div class="px-8 py-4 border-b border-gray-200 bg-white">
+                                <div class="flex items-center justify-between">
+                                    <h1 class="text-xl font-semibold text-gray-900 tracking-tight">Keeneyes</h1>
+                                    <div class="flex items-center space-x-3">
+                                        <button class="bg-white border border-gray-300 text-gray-700 rounded-lg px-4 py-2 text-sm font-medium hover:bg-gray-50 transition-colors flex items-center space-x-2">
+                                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 2L14 4L8 10L4 11L5 7L11 1L12 2Z"/>
+                                            </svg>
+                                            <span>Add Note</span>
+                                        </button>
+                                        <button class="bg-blue-600 text-white rounded-lg px-4 py-2 text-sm font-medium hover:bg-blue-700 transition-colors flex items-center space-x-2">
+                                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="8" cy="8" r="3"/>
+                                            </svg>
+                                            <span>Record</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Core Workspace -->
+                            <div class="flex h-full bg-gray-50">
+
+                                <!-- Integrated Main Canvas -->
+                                <div class="flex-1 overflow-hidden">
+                                    <div class="p-6">
+
+                                        <!-- Client Context -->
+                                        <div class="mb-6">
+                                            <div class="flex items-center justify-between mb-3">
+                                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Client: Acme Corp Contract Renewal</h3>
+                                                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">6 months of conversations</span>
+                                            </div>
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                <!-- Previous Context -->
+                                                <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                                    <div class="flex items-center space-x-2 mb-2">
+                                                        <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
+                                                        <div class="text-sm font-medium text-gray-700">Aug 15 - Kickoff call</div>
+                                                    </div>
+                                                    <div class="text-xs text-gray-600 mb-2">Sarah mentioned "compliance gaps" but quickly changed subject</div>
+                                                    <div class="text-xs text-blue-600 font-medium">Context: She's worried about security audit findings</div>
+                                                </div>
+
+                                                <!-- Budget Conversation -->
+                                                <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                                    <div class="flex items-center space-x-2 mb-2">
+                                                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                                        <div class="text-sm font-medium text-gray-700">Sept 3 - Budget review</div>
+                                                    </div>
+                                                    <div class="text-xs text-gray-600 mb-2">Mike asked about "measurable ROI" three times in 20 minutes</div>
+                                                    <div class="text-xs text-green-600 font-medium">Pattern: He needs concrete numbers to justify renewal</div>
+                                                </div>
+
+                                                <!-- User Feedback -->
+                                                <div class="bg-white rounded-lg p-4 border border-gray-200">
+                                                    <div class="flex items-center space-x-2 mb-2">
+                                                        <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                                        <div class="text-sm font-medium text-gray-700">Sept 20 - User feedback</div>
+                                                    </div>
+                                                    <div class="text-xs text-gray-600 mb-2">Lisa said "the team loves it" but mentioned training challenges</div>
+                                                    <div class="text-xs text-purple-600 font-medium">Reality: Adoption is slower than expected</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Active Threads & Intelligence -->
+                                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                                            <!-- Left: Current Activity -->
+                                            <div class="lg:col-span-2 space-y-6">
+
+                                                <!-- Live Thread -->
+                                                <div>
+                                                    <div class="flex items-center justify-between mb-3">
+                                                        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Client Call - Acme Corp</h2>
+                                                        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Contract renewal discussion</span>
+                                                    </div>
+
+                                            <!-- Live Transcription -->
+                                            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                                                <div class="p-4 bg-gray-50 border-b border-gray-200">
+                                                    <div class="flex items-center justify-between">
+                                                        <div class="flex items-center space-x-2">
+                                                            <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                                                            <span class="text-sm font-medium text-gray-700">Live transcription</span>
+                                                        </div>
+                                                        <div class="text-xs text-gray-500">Auto-generating insights and connections</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="p-4 space-y-4">
+                                                    <!-- Sarah's opening -->
+                                                    <div class="flex space-x-3">
+                                                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                            <span class="text-xs text-white font-semibold">S</span>
+                                                        </div>
+                                                        <div class="flex-1">
+                                                            <div class="text-sm font-medium text-gray-900">Sarah (IT Director)</div>
+                                                            <div class="text-sm text-gray-700 mt-1">"Thanks for the renewal proposal. We're definitely interested in continuing, but I need to understand the new security features better. Our compliance team has been asking more questions lately."</div>
+                                                            <div class="mt-2 p-2 bg-blue-50 rounded border border-blue-200">
+                                                                <div class="text-xs text-blue-700 font-medium">📝 Between the lines: References Aug 15 "compliance gaps" comment. Security audit pressure is real.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Mike's budget concerns -->
+                                                    <div class="flex space-x-3">
+                                                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                            <span class="text-xs text-white font-semibold">M</span>
+                                                        </div>
+                                                        <div class="flex-1">
+                                                            <div class="text-sm font-medium text-gray-900">Mike (CFO)</div>
+                                                            <div class="text-sm text-gray-700 mt-1">"Before we dive into features, I need to understand the ROI here. What measurable improvements can we expect? Our Q4 budget review is coming up and I need concrete numbers."</div>
+                                                            <div class="mt-2 p-2 bg-green-50 rounded border border-green-200">
+                                                                <div class="text-xs text-green-700 font-medium">🔗 Pattern: 3rd time asking for "measurable ROI" (Sept 3 call). Needs data to justify to board.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Lisa's user perspective -->
+                                                    <div class="flex space-x-3">
+                                                        <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                            <span class="text-xs text-white font-semibold">L</span>
+                                                        </div>
+                                                        <div class="flex-1">
+                                                            <div class="text-sm font-medium text-gray-900">Lisa (Operations Manager)</div>
+                                                            <div class="text-sm text-gray-700 mt-1">"My team has been using the platform and overall feedback is positive. Though I will say, the initial learning curve was steeper than we expected. Any improvements to the user experience would be welcomed."</div>
+                                                            <div class="mt-2 p-2 bg-purple-50 rounded border border-purple-200">
+                                                                <div class="text-xs text-purple-700 font-medium">🔗 Reality check: Sept 20 call revealed adoption slower than expected. "Training challenges" = user experience issues.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Tom typing... -->
+                                                    <div class="flex space-x-3">
+                                                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                                            <span class="text-xs text-white font-semibold">T</span>
+                                                        </div>
+                                                        <div class="flex-1">
+                                                            <div class="text-sm font-medium text-gray-900">Tom (CEO)</div>
+                                                            <div class="text-sm text-gray-500 italic mt-1">typing...</div>
+                                                            <div class="mt-2 p-2 bg-yellow-50 rounded border border-yellow-200 border-dashed">
+                                                                <div class="text-xs text-yellow-700 font-medium">💭 Predicted: Will ask about competitive advantage and strategic alignment (based on CEO patterns)</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Relationship Intelligence -->
+                                            <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-xl p-6 border border-orange-200">
+                                                <div class="flex items-center justify-between mb-4">
+                                                    <div class="flex items-center space-x-3">
+                                                        <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+                                                        <h3 class="font-semibold text-gray-900">Stakeholder Dynamics</h3>
+                                                        <span class="px-2 py-1 text-xs bg-orange-100 text-orange-700 rounded-full">6 months of intel</span>
+                                                    </div>
+                                                    <span class="text-sm text-gray-500">Acme Corp renewal</span>
+                                                </div>
+                                                <div class="text-gray-800 leading-relaxed mb-4">Sarah's "compliance team asking questions" connects to her Aug 15 "compliance gaps" slip. She's under pressure from a security audit but doesn't want to admit it.</div>
+                                                <div class="text-sm text-orange-600 font-medium">Insight: Frame renewal as audit compliance solution, not feature upgrade</div>
+                                            </div>
+
+                                            <!-- Decision Maker Intelligence -->
+                                            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                                                <div class="flex items-center justify-between mb-4">
+                                                    <div class="flex items-center space-x-3">
+                                                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                                        <h3 class="font-semibold text-gray-900">Mike's Budget Pressure</h3>
+                                                        <span class="px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">Key blocker</span>
+                                                    </div>
+                                                    <span class="text-sm text-gray-500">3rd ROI request</span>
+                                                </div>
+                                                <div class="text-gray-800 leading-relaxed mb-4">Mike's asking for "measurable ROI" for the third time in 6 weeks. His Q4 budget review pressure is real - he needs concrete numbers to justify the renewal to the board.</div>
+                                                <div class="text-sm text-green-600 font-medium">Strategy: Lead with cost savings from security compliance, not feature benefits</div>
+                                            </div>
+
+                                            <!-- Client Intelligence Synthesis -->
+                                            <div class="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl p-6 border border-yellow-200 border-dashed">
+                                                <div class="flex items-center justify-between mb-4">
+                                                    <div class="flex items-center space-x-3">
+                                                        <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
+                                                        <h3 class="font-semibold text-gray-900">Renewal Strategy Ready</h3>
+                                                        <span class="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded-full">Complete picture</span>
+                                                    </div>
+                                                    <button class="text-xs text-yellow-600 hover:text-yellow-800 font-medium">View full analysis</button>
+                                                </div>
+                                                <div class="text-gray-800 leading-relaxed mb-4">Acme Corp dynamics mapped: Sarah needs audit compliance solution, Mike needs ROI data for board, Lisa needs UX improvements. All stakeholder motivations and pressure points identified.</div>
+                                                <div class="text-sm text-yellow-600 font-medium">Strategy: Lead with compliance & cost savings, follow with UX improvements</div>
+                                                </div>
+
+                                                <!-- Timeline of Events -->
+                                                <div>
+                                                    <div class="flex items-center justify-between mb-3 mt-6">
+                                                        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Relationship Timeline</h2>
+                                                        <button class="text-xs text-blue-600 hover:text-blue-800 font-medium">View 6-month history</button>
+                                                    </div>
+                                                    <div class="space-y-3">
+                                                        <div class="flex space-x-3">
+                                                            <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                                                            <div class="flex-1">
+                                                                <div class="text-sm font-medium text-gray-900">Aug 15 - Compliance pressure revealed</div>
+                                                                <div class="text-xs text-gray-500">Sarah's "compliance gaps" slip exposed security audit concerns</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex space-x-3">
+                                                            <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                                                            <div class="flex-1">
+                                                                <div class="text-sm font-medium text-gray-900">Sept 3 - Mike's ROI fixation identified</div>
+                                                                <div class="text-xs text-gray-500">"Measurable ROI" mentioned 3 times, Q4 budget pressure confirmed</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex space-x-3">
+                                                            <div class="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+                                                            <div class="flex-1">
+                                                                <div class="text-sm font-medium text-gray-900">Sept 20 - Adoption challenges surfaced</div>
+                                                                <div class="text-xs text-gray-500">Lisa's "positive feedback" revealed UX training difficulties</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex space-x-3">
+                                                            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2 animate-pulse"></div>
+                                                            <div class="flex-1">
+                                                                <div class="text-sm font-medium text-gray-900">Now - All motivations mapped</div>
+                                                                <div class="text-xs text-gray-500">Complete stakeholder intelligence gathered, renewal strategy ready</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Right: Quick Insights -->
+                                            <div class="space-y-6">
+
+                                                <!-- Quick Insights -->
+                                                <div>
+                                                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Relationship Intelligence</h3>
+                                                    <div class="space-y-3">
+                                                        <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+                                                            <div class="flex items-center space-x-2 mb-2">
+                                                                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                                                <div class="text-sm font-semibold text-gray-900">Sarah's real concern identified</div>
+                                                            </div>
+                                                            <div class="text-xs text-gray-600">Aug 15: "Compliance gaps" mention → Now: "Compliance team asking questions"</div>
+                                                        </div>
+
+                                                        <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+                                                            <div class="flex items-center space-x-2 mb-2">
+                                                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                                                <div class="text-sm font-semibold text-gray-900">Mike's approval pattern mapped</div>
+                                                            </div>
+                                                            <div class="text-xs text-gray-600">Needs "measurable ROI" data for board justification. Q4 budget pressure confirmed.</div>
+                                                        </div>
+
+                                                        <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+                                                            <div class="flex items-center space-x-2 mb-2">
+                                                                <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                                                <div class="text-sm font-semibold text-gray-900">Lisa's adoption challenge</div>
+                                                            </div>
+                                                            <div class="text-xs text-gray-600">Says "positive feedback" but reveals UX issues. Training challenges = user experience problems.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Recent Activity Feed -->
+                                                <div>
+                                                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Live Analysis</h3>
+                                                    <div class="space-y-2">
+                                                        <div class="text-xs text-gray-600 py-2 px-3 bg-white rounded border border-gray-200">
+                                                            <div class="font-medium">Detected hidden security audit pressure</div>
+                                                            <div class="text-gray-500">2 minutes ago • Connected to Aug 15 conversation</div>
+                                                        </div>
+                                                        <div class="text-xs text-gray-600 py-2 px-3 bg-white rounded border border-gray-200">
+                                                            <div class="font-medium">Mapped Mike's board pressure timeline</div>
+                                                            <div class="text-gray-500">1 minute ago • Q4 budget review approaching</div>
+                                                        </div>
+                                                        <div class="text-xs text-gray-600 py-2 px-3 bg-white rounded border border-gray-200">
+                                                            <div class="font-medium">Identified Lisa's UX adoption gap</div>
+                                                            <div class="text-gray-500">30 seconds ago • Training challenges = usability issues</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Mobile: Simple spacer -->
+                <div class="block sm:hidden py-2"></div>
+
+                <!-- CTA -->
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center pt-1 sm:pt-8 px-6">
+                    <div class="magnet-container relative inline-block">
+                    <button class="magnet-button w-full sm:w-auto bg-ocean-500 hover:bg-ocean-600 text-paper-50 px-5 sm:px-8 py-2.5 sm:py-4 rounded-full text-sm sm:text-lg font-medium transition-all duration-200 shadow-lifted hover:shadow-xl relative z-10">
+                        Give me this advantage
+                    </button>
+                </div>
+                    <a href="#how" class="text-ink-400 hover:text-ink-600 transition-colors duration-200 flex items-center space-x-2">
+                        <span>See how it works</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 2L8 14M14 8L8 14L2 8"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="how" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-paper-100 to-paper-200">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-serif text-ink-700 mb-4">Your professional intelligence command center</h2>
+                <p class="text-lg text-ink-400">Recording every conversation. Analyzing behavioral patterns. Revealing the hidden dynamics that drive professional relationships. The strategic advantage you've been missing.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Step 1 -->
+                <div class="demo-card bg-paper-50 rounded-xl p-6 shadow-soft hover:shadow-lifted transition-all duration-300">
+                    <div class="step-number w-10 h-10 bg-ocean-500 text-paper-50 rounded-full flex items-center justify-center font-mono font-medium mb-4">
+                        1
+                    </div>
+                    <h3 class="text-xl font-medium text-ink-700 mb-3">Records what people actually say</h3>
+                    <p class="text-ink-400 mb-4">"Like we discussed..." and you're nodding but thinking "wait, what exactly did we discuss?"</p>
+                    <div class="bg-paper-200/50 rounded-lg p-3 font-mono text-sm text-ink-500">
+                        <div class="text-ocean-600">🎤 Records anything</div>
+                        <div class="text-xs text-ink-400 mt-1">Stays on your Mac</div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="demo-card bg-paper-50 rounded-xl p-6 shadow-soft hover:shadow-lifted transition-all duration-300">
+                    <div class="step-number w-10 h-10 bg-ocean-500 text-paper-50 rounded-full flex items-center justify-center font-mono font-medium mb-4">
+                        2
+                    </div>
+                    <h3 class="text-xl font-medium text-ink-700 mb-3">Reveals insights across conversations</h3>
+                    <p class="text-ink-400 mb-4">Being the only person in the room who actually knows what the client wants.</p>
+                    <div class="bg-paper-200/50 rounded-lg p-3 font-mono text-sm text-ink-500">
+                        <div class="text-amber-600">🧠 Builds knowledge</div>
+                        <div class="text-xs text-ink-400 mt-1">About your world</div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="demo-card bg-paper-50 rounded-xl p-6 shadow-soft hover:shadow-lifted transition-all duration-300">
+                    <div class="step-number w-10 h-10 bg-ocean-500 text-paper-50 rounded-full flex items-center justify-center font-mono font-medium mb-4">
+                        3
+                    </div>
+                    <h3 class="text-xl font-medium text-ink-700 mb-3">Access exactly what you need</h3>
+                    <p class="text-ink-400 mb-4">Making decisions with every relevant conversation in your head, not just the ones you remember.</p>
+                    <div class="bg-paper-200/50 rounded-lg p-3 font-mono text-sm text-ink-500">
+                        <div class="text-ocean-600">⌘K Ask anything</div>
+                        <div class="text-xs text-ink-400 mt-1">"what approaches work with Alex?"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenarios Section -->
+    <section id="scenarios" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-paper-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- Interactive Scenarios -->
+            <div class="text-center mb-12 sm:mb-16">
+                <h3 class="text-3xl sm:text-4xl font-serif text-ink-700 mb-4">Professional scenarios where hidden dynamics matter</h3>
+                <p class="text-lg text-ink-400">Three moments when seeing beneath the surface makes the difference between strategic success and professional blindness.</p>
+
+                <!-- Scenario Selector - Scrollable on mobile -->
+                <div class="scenario-tabs flex justify-center mt-8 px-4" role="tablist">
+                    <div class="bg-paper-200/50 rounded-full p-1.5 flex flex-wrap justify-center gap-1 sm:space-x-1 sm:flex-nowrap">
+                        <button class="scenario-tab active px-3 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 bg-paper-50 text-ocean-600 shadow-soft text-center"
+                                data-scenario="founder"
+                                role="tab"
+                                aria-selected="true"
+                                aria-controls="founder-scenario"
+                                id="founder-tab"
+                                tabindex="0">
+                            Running a startup
+                        </button>
+                        <button class="scenario-tab px-3 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-ink-400 hover:text-ink-600 text-center"
+                                data-scenario="community"
+                                role="tab"
+                                aria-selected="false"
+                                aria-controls="community-scenario"
+                                id="community-tab"
+                                tabindex="-1">
+                            Managing people
+                        </button>
+                        <button class="scenario-tab px-3 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-ink-400 hover:text-ink-600 text-center"
+                                data-scenario="consultant"
+                                role="tab"
+                                aria-selected="false"
+                                aria-controls="consultant-scenario"
+                                id="consultant-tab"
+                                tabindex="-1">
+                            Solving for clients
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Scenario Content -->
+            <div class="scenario-content max-w-5xl mx-auto">
+
+                <!-- Founder Scenario -->
+                <div class="scenario-panel active" id="founder-scenario" role="tabpanel" aria-labelledby="founder-tab">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-center">
+                        <div class="space-y-6">
+                            <div class="scenario-context">
+                                <h4 class="text-2xl font-serif text-ink-700 mb-4">Sarah leads a Series A startup</h4>
+                                <p class="text-lg text-ink-400 leading-relaxed">
+                                    Board meetings have become minefields. David seemed supportive, but Sarah keeps getting blindsided by his questions. She thought she understood what mattered to him, but the relationship feels fundamentally different now.
+                                </p>
+                            </div>
+
+                            <div class="pain-point bg-rose-50 border border-rose-200/50 rounded-lg p-4">
+                                <div class="text-rose-600 text-sm mb-2 font-medium">🎯 The moment everything shifted</div>
+                                <div class="text-ink-600 font-serif italic">"Sarah, didn't you say Q4 would be different this time?"</div>
+                                <div class="text-ink-400 text-sm mt-2">David's tone isn't curious—it's prosecutorial. This isn't about the timeline, it's about trust. When did he stop believing in her ability to deliver?</div>
+                            </div>
+
+                            <div class="solution bg-ocean-50 border border-ocean-200/50 rounded-lg p-4">
+                                <div class="text-ocean-600 text-sm mb-3 font-medium">The hidden relationship dynamic</div>
+                                <div class="text-ink-600 text-sm mb-3 leading-relaxed">
+                                    David lost faith when Sarah deflected his profitability question in July. He's not helping anymore—he's building a paper trail. Every question is documentation for future board discussions about leadership.
+                                </div>
+                                <div class="insight-evidence bg-paper-50 rounded p-3">
+                                    <div class="text-ink-500 text-xs mb-1">Evidence of the shift:</div>
+                                    <div class="text-ink-600 text-xs space-y-1">
+                                        <div>• Questions focus on accountability, not strategy</div>
+                                        <div>• "Helpful suggestions" create more work, not clarity</div>
+                                        <div>• Body language: arms crossed, checks phone during updates</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="interface-mockup">
+                            <!-- Clean Mac App Interface -->
+                            <div class="mac-app bg-paper-50 rounded-xl border border-paper-400/30 shadow-lifted overflow-hidden" style="min-height: 520px;">
+
+                                <!-- Mac Window Header -->
+                                <div class="window-header bg-paper-100/90 backdrop-blur-sm border-b border-paper-300/50 px-4 py-3 flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="flex space-x-2">
+                                            <div class="w-3 h-3 bg-rose-400 rounded-full"></div>
+                                            <div class="w-3 h-3 bg-amber-400 rounded-full"></div>
+                                            <div class="w-3 h-3 bg-ocean-400 rounded-full"></div>
+                                        </div>
+                                        <div class="text-ink-600 text-sm font-medium">David Chen</div>
+                                    </div>
+                                    <div class="text-ink-400 text-xs">Board Member • 47 conversations</div>
+                                </div>
+
+                                <!-- Main Content Area -->
+                                <div class="app-body p-6">
+
+                                    <!-- Before/After Understanding -->
+                                    <div class="understanding-shift mb-6">
+                                        <div class="grid grid-cols-2 gap-6">
+
+                                            <!-- Before -->
+                                            <div class="before-understanding">
+                                                <div class="text-ink-500 text-xs font-medium mb-3 uppercase tracking-wide">3 Weeks Ago</div>
+                                                <div class="bg-paper-100 rounded-lg p-4 border border-paper-300/50">
+                                                    <div class="text-ink-700 text-sm font-medium mb-2">Sarah's View</div>
+                                                    <div class="text-ink-600 text-sm leading-relaxed">
+                                                        "David cares about market positioning and competitive advantage. He wants us to move fast."
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- After -->
+                                            <div class="after-understanding">
+                                                <div class="text-ocean-600 text-xs font-medium mb-3 uppercase tracking-wide">Now</div>
+                                                <div class="bg-ocean-50 rounded-lg p-4 border border-ocean-200/50">
+                                                    <div class="text-ocean-700 text-sm font-medium mb-2">Reality</div>
+                                                    <div class="text-ink-600 text-sm leading-relaxed">
+                                                        "David lost faith when Sarah deflected his profitability question. He's building a paper trail, not helping."
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- The Turning Point -->
+                                    <div class="turning-point bg-amber-50 rounded-lg border border-amber-200/50 p-4 mb-6">
+                                        <div class="flex items-start space-x-3">
+                                            <div class="flex-shrink-0 w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
+                                                <div class="w-2 h-2 bg-amber-500 rounded-full"></div>
+                                            </div>
+                                            <div>
+                                                <div class="text-amber-700 text-sm font-medium mb-1">July 22nd, 2:47 PM</div>
+                                                <div class="text-ink-600 text-sm leading-relaxed">
+                                                    <strong>David:</strong> "What's our path to profitability?"<br>
+                                                    <strong>Sarah:</strong> "We're focused on growth right now."<br>
+                                                    <span class="text-amber-600 font-medium">3-second pause. That's when he gave up.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Current Behavior Pattern -->
+                                    <div class="behavior-pattern mb-6">
+                                        <div class="text-ink-600 text-sm font-medium mb-3">Current Behavior</div>
+                                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                            <div class="pattern-item bg-rose-50 rounded-lg p-3 border border-rose-200/50">
+                                                <div class="text-rose-600 text-xs font-medium mb-1">Body Language</div>
+                                                <div class="text-ink-600 text-xs">Arms crossed, checks phone, sits back</div>
+                                            </div>
+                                            <div class="pattern-item bg-rose-50 rounded-lg p-3 border border-rose-200/50">
+                                                <div class="text-rose-600 text-xs font-medium mb-1">Questions</div>
+                                                <div class="text-ink-600 text-xs">Timeline-focused, not strategy</div>
+                                            </div>
+                                            <div class="pattern-item bg-rose-50 rounded-lg p-3 border border-rose-200/50">
+                                                <div class="text-rose-600 text-xs font-medium mb-1">Responses</div>
+                                                <div class="text-ink-600 text-xs">"Sounds good" instead of follow-ups</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Recommendation -->
+                                    <div class="action-rec bg-ocean-50 rounded-lg border border-ocean-200/50 p-4">
+                                        <div class="text-ocean-700 text-sm font-medium mb-2">Recommended Approach</div>
+                                        <div class="text-ink-600 text-sm leading-relaxed mb-2">
+                                            "David, what concerns you most about our path forward?"
+                                        </div>
+                                        <div class="text-ink-500 text-xs">
+                                            Stop presenting progress. Start acknowledging problems. He needs to know you see the same risks he does.
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Status Bar -->
+                                <div class="status-bar bg-paper-100/80 backdrop-blur-sm border-t border-paper-300/50 px-4 py-2 flex items-center justify-between">
+                                    <div class="text-ink-500 text-xs">Trust Status: Breaking</div>
+                                    <div class="text-ink-400 text-xs">Still recoverable if addressed directly</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Manager Scenario -->
+                <div class="scenario-panel" id="community-scenario" role="tabpanel" aria-labelledby="community-tab">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-center">
+                        <div class="space-y-6">
+                            <div class="scenario-context">
+                                <h4 class="text-2xl font-serif text-ink-700 mb-4">Marcus leads developer relations</h4>
+                                <p class="text-lg text-ink-400 leading-relaxed">
+                                    Developer conversations feel increasingly transactional. Marcus suspects there are hidden dynamics he's missing—unspoken hierarchies and decision-making processes that determine who actually adopts and who just evaluates.
+                                </p>
+                            </div>
+
+                            <div class="pain-point bg-rose-50 border border-rose-200/50 rounded-lg p-4">
+                                <div class="text-rose-600 text-sm mb-2 font-medium">🎯 The evaluation that isn't</div>
+                                <div class="text-ink-600 font-serif italic">"Hey Marcus, as we discussed, I'm interested in the GraphQL stuff..."</div>
+                                <div class="text-ink-400 text-sm mt-2">Alex isn't exploring options—he's performing due diligence for someone else. His systematic questions aren't curiosity, they're a checklist for a decision already in motion.</div>
+                            </div>
+
+                            <div class="solution bg-ocean-50 border border-ocean-200/50 rounded-lg p-4">
+                                <div class="text-ocean-600 text-sm mb-3 font-medium">The hidden organizational dynamic</div>
+                                <div class="text-ink-600 text-sm mb-3 leading-relaxed">
+                                    Alex is the technical validator, not the decision maker. Someone with authority sent him to gather intel. He needs ammunition to defend a recommendation internally, not reasons to choose you over competitors.
+                                </div>
+                                <div class="insight-evidence bg-paper-50 rounded p-3">
+                                    <div class="text-ink-500 text-xs mb-1">Evidence of the hidden hierarchy:</div>
+                                    <div class="text-ink-600 text-xs space-y-1">
+                                        <div>• Questions follow enterprise evaluation framework</div>
+                                        <div>• Screenshots everything but doesn't try demos</div>
+                                        <div>• Asks "what would your team think?" revealing the real audience</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="interface-mockup">
+                            <!-- Clean Mac App Interface -->
+                            <div class="mac-app bg-paper-50 rounded-xl border border-paper-400/30 shadow-lifted overflow-hidden" style="min-height: 520px;">
+
+                                <!-- Mac Window Header -->
+                                <div class="window-header bg-paper-100/90 backdrop-blur-sm border-b border-paper-300/50 px-4 py-3 flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="flex space-x-2">
+                                            <div class="w-3 h-3 bg-rose-400 rounded-full"></div>
+                                            <div class="w-3 h-3 bg-amber-400 rounded-full"></div>
+                                            <div class="w-3 h-3 bg-ocean-400 rounded-full"></div>
+                                        </div>
+                                        <div class="text-ink-600 text-sm font-medium">Alex Kim</div>
+                                    </div>
+                                    <div class="text-ink-400 text-xs">Senior Developer • 12 conversations</div>
+                                </div>
+
+                                <!-- Main Content Area -->
+                                <div class="app-body p-6">
+
+                                    <!-- Developer Profile Analysis -->
+                                    <div class="developer-profile mb-6">
+                                        <div class="text-ink-600 text-sm font-medium mb-3">Developer Evaluation Pattern</div>
+                                        <div class="bg-amber-50 rounded-lg p-4 border border-amber-200/50">
+                                            <div class="text-amber-700 text-sm font-medium mb-2">What's really happening</div>
+                                            <div class="text-ink-600 text-sm leading-relaxed mb-3">
+                                                Alex isn't evaluating for himself—he's the technical validator for his team. His systematic questions and focus on edge cases indicate he's building a report for someone else to make the decision.
+                                            </div>
+                                            <div class="evidence-list space-y-1 text-ink-600 text-xs">
+                                                <div>• Questions follow enterprise evaluation framework</div>
+                                                <div>• Screenshots everything but doesn't try demos</div>
+                                                <div>• Asks about pricing without mentioning budget</div>
+                                                <div>• Focuses on "what breaks" not "what works"</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pattern Recognition -->
+                                    <div class="pattern-recognition mb-6">
+                                        <div class="text-ink-600 text-sm font-medium mb-3">His Decision Framework</div>
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div class="framework-item bg-paper-100 rounded-lg p-3 border border-paper-300/50">
+                                                <div class="text-ink-700 text-sm font-medium mb-1">Role: Technical Gatekeeper</div>
+                                                <div class="text-ink-600 text-xs">High influence, low authority. His job is finding problems, not solutions.</div>
+                                            </div>
+                                            <div class="framework-item bg-paper-100 rounded-lg p-3 border border-paper-300/50">
+                                                <div class="text-ink-700 text-sm font-medium mb-1">Focus: Risk Mitigation</div>
+                                                <div class="text-ink-600 text-xs">Needs to defend his recommendation internally. Fears being blamed for adoption failures.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Communication Strategy -->
+                                    <div class="communication-strategy mb-6">
+                                        <div class="text-ink-600 text-sm font-medium mb-3">What Alex Actually Needs</div>
+                                        <div class="strategy-grid space-y-3">
+                                            <div class="strategy-item bg-ocean-50 rounded-lg p-3 border border-ocean-200/50">
+                                                <div class="text-ocean-700 text-sm font-medium mb-1">Not convincing—arming</div>
+                                                <div class="text-ink-600 text-xs">Give him specific data to win the internal argument. Focus on edge cases and failure modes, not ideal scenarios.</div>
+                                            </div>
+                                            <div class="strategy-item bg-ocean-50 rounded-lg p-3 border border-ocean-200/50">
+                                                <div class="text-ocean-700 text-sm font-medium mb-1">Acknowledge the hierarchy</div>
+                                                <div class="text-ink-600 text-xs">"What questions will your team have?" Position yourself as his ally, not someone trying to bypass him.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Conversation History -->
+                                    <div class="conversation-insights mb-6">
+                                        <div class="text-ink-600 text-sm font-medium mb-3">Key Conversation Moments</div>
+                                        <div class="space-y-2">
+                                            <div class="insight-moment bg-paper-100 rounded-lg p-3 border border-paper-300/50">
+                                                <div class="flex items-start justify-between mb-1">
+                                                    <div class="text-ink-700 text-xs font-medium">Oct 3 - Technical Deep Dive</div>
+                                                    <div class="text-ink-400 text-xs">2:22 PM</div>
+                                                </div>
+                                                <div class="text-ink-600 text-xs leading-relaxed">"What happens to query performance when you hit 10M records?" - Focus on scalability limits, not baseline performance.</div>
+                                            </div>
+                                            <div class="insight-moment bg-paper-100 rounded-lg p-3 border border-paper-300/50">
+                                                <div class="flex items-start justify-between mb-1">
+                                                    <div class="text-ink-700 text-xs font-medium">Sep 28 - Initial Contact</div>
+                                                    <div class="text-ink-400 text-xs">4:15 PM</div>
+                                                </div>
+                                                <div class="text-ink-600 text-xs leading-relaxed">"My team is evaluating GraphQL solutions..." - Using "my team" language early. He's representing others from the start.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Recommended Approach -->
+                                    <div class="recommended-approach bg-ocean-50 rounded-lg border border-ocean-200/50 p-4">
+                                        <div class="text-ocean-700 text-sm font-medium mb-2">Next Conversation Strategy</div>
+                                        <div class="text-ink-600 text-sm leading-relaxed mb-2">
+                                            "Alex, what specific concerns will your team raise that I should be prepared to address?"
+                                        </div>
+                                        <div class="text-ink-500 text-xs">
+                                            This acknowledges his real role and makes you his ally instead of another vendor trying to sell to him. He'll likely be relieved you understand the dynamic.
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Status Bar -->
+                                <div class="status-bar bg-paper-100/80 backdrop-blur-sm border-t border-paper-300/50 px-4 py-2 flex items-center justify-between">
+                                    <div class="text-ink-500 text-xs">Role: Technical Gatekeeper</div>
+                                    <div class="text-ink-400 text-xs">High influence, low authority</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consultant Scenario -->
+                <div class="scenario-panel" id="consultant-scenario" role="tabpanel" aria-labelledby="consultant-tab">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-center">
+                        <div class="space-y-6">
+                            <div class="scenario-context">
+                                <h4 class="text-2xl font-serif text-ink-700 mb-4">David consults for growth companies</h4>
+                                <p class="text-lg text-ink-400 leading-relaxed">
+                                    Client engagements feel increasingly like theater. David suspects he's being brought in not to solve problems, but to provide external validation for decisions already made. The real dynamics are hidden beneath the consulting brief.
+                                </p>
+                            </div>
+
+                            <div class="pain-point bg-rose-50 border border-rose-200/50 rounded-lg p-4">
+                                <div class="text-rose-600 text-sm mb-2 font-medium">🎯 The consultation that's an alibi</div>
+                                <div class="text-ink-600 font-serif italic">"We're struggling with user retention in our mobile app..."</div>
+                                <div class="text-ink-400 text-sm mt-2">But they've already decided to fire the product team. The CEO needs an external expert to document the problems before making changes. David isn't being hired to consult—he's being hired to provide cover.</div>
+                            </div>
+
+                            <div class="solution bg-ocean-50 border border-ocean-200/50 rounded-lg p-4">
+                                <div class="text-ocean-600 text-sm mb-3 font-medium">The hidden client dynamic</div>
+                                <div class="text-ink-600 text-sm mb-3 leading-relaxed">
+                                    This isn't a consulting project—it's reputation laundering. The CEO needs external validation for expensive layoffs. Any recommendations that suggest the team could fix the problem will be quietly ignored.
+                                </div>
+                                <div class="insight-evidence bg-paper-50 rounded p-3">
+                                    <div class="text-ink-500 text-xs mb-1">Evidence of the hidden agenda:</div>
+                                    <div class="text-ink-600 text-xs space-y-1">
+                                        <div>• Budget approved instantly despite "urgent" timeline</div>
+                                        <div>• Product team excluded from initial conversations</div>
+                                        <div>• Focus on blame documentation, not solution exploration</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="interface-mockup">
+                            <!-- Clean Mac App Interface -->
+                            <div class="mac-app bg-paper-50 rounded-xl border border-paper-400/30 shadow-lifted overflow-hidden" style="min-height: 520px;">
+
+                                <!-- Mac Window Header -->
+                                <div class="window-header bg-paper-100/90 backdrop-blur-sm border-b border-paper-300/50 px-4 py-3 flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="flex space-x-2">
+                                            <div class="w-3 h-3 bg-rose-400 rounded-full"></div>
+                                            <div class="w-3 h-3 bg-amber-400 rounded-full"></div>
+                                            <div class="w-3 h-3 bg-ocean-400 rounded-full"></div>
+                                        </div>
+                                        <div class="text-ink-600 text-sm font-medium">MobileFirst Inc</div>
+                                    </div>
+                                    <div class="text-ink-400 text-xs">Client • Initial consultation</div>
+                                </div>
+
+                                <!-- Main Content Area -->
+                                <div class="app-body p-6">
+
+                                    <!-- Client Context Analysis -->
+                                    <div class="client-context mb-6">
+                                        <div class="text-ink-600 text-sm font-medium mb-3">Engagement Analysis</div>
+                                        <div class="bg-rose-50 rounded-lg p-4 border border-rose-200/50">
+                                            <div class="text-rose-700 text-sm font-medium mb-2">This isn't a consulting project—it's an alibi</div>
+                                            <div class="text-ink-600 text-sm leading-relaxed mb-3">
+                                                The CEO has already decided to fire the product team. You're being hired to provide external validation for decisions already made, not to solve retention problems.
+                                            </div>
+                                            <div class="warning-signals space-y-1 text-ink-600 text-xs">
+                                                <div>• Budget approved instantly despite "urgent" timeline</div>
+                                                <div>• Product team excluded from initial conversations</div>
+                                                <div>• Focus on documenting blame, not finding solutions</div>
+                                                <div>• Specific request for metrics showing team failure</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hidden Dynamics -->
+                                    <div class="hidden-dynamics mb-6">
+                                        <div class="text-ink-600 text-sm font-medium mb-3">The Real Power Structure</div>
+                                        <div class="grid grid-cols-1 gap-3">
+                                            <div class="dynamic-item bg-paper-100 rounded-lg p-3 border border-paper-300/50">
+                                                <div class="text-ink-700 text-sm font-medium mb-1">CEO's Position</div>
+                                                <div class="text-ink-600 text-xs mb-1">Needs external cover for expensive layoffs. Board expects due diligence before disrupting the team.</div>
+                                                <div class="text-ink-500 text-xs">Your report becomes justification, not recommendation.</div>
+                                            </div>
+                                            <div class="dynamic-item bg-paper-100 rounded-lg p-3 border border-paper-300/50">
+                                                <div class="text-ink-700 text-sm font-medium mb-1">Your Exposure</div>
+                                                <div class="text-ink-600 text-xs mb-1">If retention doesn't improve: "The consultant said fire them." If it does: "My bold leadership fixed it."</div>
+                                                <div class="text-ink-500 text-xs">You're the fall guy, not the advisor.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- The Trap -->
+                                    <div class="client-trap mb-6">
+                                        <div class="text-ink-600 text-sm font-medium mb-3">The Consulting Trap</div>
+                                        <div class="trap-analysis bg-amber-50 rounded-lg p-3 border border-amber-200/50">
+                                            <div class="text-amber-700 text-sm font-medium mb-2">No winning move with current framing</div>
+                                            <div class="space-y-2 text-ink-600 text-xs">
+                                                <div><strong>Comply:</strong> Destroy careers of people who might just need better support</div>
+                                                <div><strong>Refuse:</strong> They'll say you couldn't identify "obvious" problems</div>
+                                                <div><strong>Either way:</strong> Your reputation gets tied to a company with public failures</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Strategic Options -->
+                                    <div class="strategic-options mb-6">
+                                        <div class="text-ink-600 text-sm font-medium mb-3">Exit Strategies</div>
+                                        <div class="space-y-3">
+                                            <div class="option bg-ocean-50 rounded-lg p-3 border border-ocean-200/50">
+                                                <div class="text-ocean-700 text-sm font-medium mb-1">Option 1: Graceful decline</div>
+                                                <div class="text-ink-600 text-xs mb-1">"I specialize in growth strategy, not organizational restructuring."</div>
+                                                <div class="text-ink-500 text-xs">Preserves relationships, avoids the trap entirely</div>
+                                            </div>
+                                            <div class="option bg-rose-50 rounded-lg p-3 border border-rose-200/50">
+                                                <div class="text-rose-700 text-sm font-medium mb-1">Option 2: Reframe entirely</div>
+                                                <div class="text-ink-600 text-xs mb-1">"Let's focus on systemic issues, not individual performance."</div>
+                                                <div class="text-ink-500 text-xs">Higher risk but could save the team</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Recommended Response -->
+                                    <div class="recommended-response bg-ocean-50 rounded-lg border border-ocean-200/50 p-4">
+                                        <div class="text-ocean-700 text-sm font-medium mb-2">Recommended Approach</div>
+                                        <div class="text-ink-600 text-sm leading-relaxed mb-2">
+                                            "Based on initial conversations, this sounds like an organizational challenge that needs HR expertise, not retention strategy. Let me refer you to consultants who specialize in team optimization."
+                                        </div>
+                                        <div class="text-ink-500 text-xs">
+                                            Exit cleanly while maintaining the relationship. Don't get pulled into their internal drama.
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Status Bar -->
+                                <div class="status-bar bg-paper-100/80 backdrop-blur-sm border-t border-paper-300/50 px-4 py-2 flex items-center justify-between">
+                                    <div class="text-ink-500 text-xs">Risk Level: High</div>
+                                    <div class="text-rose-600 text-xs font-medium">Exit recommended</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-paper-50 to-paper-100">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl sm:text-4xl font-serif text-ink-700 mb-6">
+                Stop being the last to know
+            </h2>
+            <p class="text-lg sm:text-xl text-ink-400 mb-12 leading-relaxed max-w-2xl mx-auto">
+                While others operate on assumptions and surface conversations, you'll see the hidden dynamics that actually drive professional relationships. The understanding that separates strategic operators from everyone else.
+            </p>
+
+            <div class="bg-paper-50 rounded-2xl p-6 sm:p-8 shadow-lifted max-w-md mx-auto">
+                <h3 class="text-2xl font-medium text-ink-700 mb-4">Command center access</h3>
+                <p class="text-ink-400 mb-6">
+                    For professionals who need to understand what's really happening.
+                </p>
+                <div class="magnet-container relative inline-block w-full">
+                    <button class="magnet-button w-full bg-ocean-500 hover:bg-ocean-600 text-paper-50 py-3 rounded-full font-medium transition-all duration-200 shadow-soft hover:shadow-lifted relative z-10">
+                        Get early access
+                    </button>
+                </div>
+                <p class="text-sm text-ink-300 mt-4">
+                    macOS only • Your conversations stay private
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="script.js?v=pure-insight"></script>
+</body>
+</html>
